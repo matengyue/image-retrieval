@@ -15,12 +15,11 @@ args = vars(parser.parse_args())
 imagesDir = args["imagesSet"]
 imagesFile = args["imagesFile"]
 
-images_names_dir = os.listdir(imagesDir)
-images_names_dir = sorted(images_names_dir)
+images_names = os.listdir(imagesDir)
+images_names = sorted(images_names)
 
-for ind, str_each_file in enumerate(images_names_dir):
-    com = ''.join(['cat ', imagesDir, str_each_file, ' >> ', imagesFile])
-    print 'os: %s' % (com)
-    os.system(com)
-com = "rm -rf " + imagesDir
-os.system(com)
+f = open(imagesFile, "w")
+for ind, str_each_file in enumerate(images_names):
+    image_full_path = ''.join([imagesDir, str_each_file])
+    f.writelines('%s\n' % image_full_path)
+f.close
